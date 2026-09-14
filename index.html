@@ -79,6 +79,108 @@
     font-size:11px;
     color:var(--text-dim);
   }
+  .field label .label-main{ color:var(--text); }
+  .field label .sub{
+    font-size:11.5px;
+    color:var(--text-dim);
+    font-weight:400;
+  }
+  .info-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:16px;
+    height:16px;
+    border-radius:50%;
+    background:none;
+    border:1px solid var(--text-dim);
+    color:var(--text-dim);
+    font-size:10px;
+    line-height:1;
+    cursor:pointer;
+    margin-left:4px;
+    vertical-align:middle;
+  }
+  .info-btn:hover, .info-btn.open{
+    border-color:var(--accent);
+    color:var(--accent);
+  }
+  .info-panel{
+    display:none;
+    margin-top:8px;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:var(--panel-raised);
+    overflow:hidden;
+  }
+  .info-panel.open{ display:block; }
+  .info-title{
+    padding:9px 12px;
+    font-size:12px;
+    color:var(--text-dim);
+    border-bottom:1px solid var(--line);
+  }
+  .info-row{
+    display:flex;
+    justify-content:space-between;
+    padding:8px 12px;
+    font-size:12.5px;
+    border-bottom:1px solid var(--line-dim);
+  }
+  .info-row span:last-child{
+    font-family:'JetBrains Mono', monospace;
+    color:var(--accent);
+  }
+  .rate-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+  }
+  .rate-cols{
+    display:flex;
+    gap:14px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    color:var(--text-dim);
+  }
+  .rate-cols span{ width:56px; text-align:right; }
+  .rate-row{
+    display:grid;
+    grid-template-columns:1fr 56px 70px;
+    gap:14px;
+    padding:8px 12px;
+    font-size:12.5px;
+    border-bottom:1px solid var(--line-dim);
+  }
+  .rate-row span:first-child{ color:var(--text); }
+  .rate-row span:nth-child(2){
+    font-family:'JetBrains Mono', monospace;
+    color:var(--accent);
+    text-align:right;
+  }
+  .rate-row span:nth-child(3){
+    font-family:'JetBrains Mono', monospace;
+    color:var(--text-dim);
+    text-align:right;
+  }
+  .info-note{
+    padding:9px 12px;
+    font-size:11px;
+    color:var(--text-dim);
+    line-height:1.5;
+  }
+  .rate-tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:var(--accent);
+    margin-right:8px;
+  }
+  .tax-info-panel{
+    margin:0;
+    border-radius:0;
+    border-left:none;
+    border-right:none;
+  }
   .field input[type=number], .field input[type=text]{
     width:100%;
     background:var(--panel-raised);
@@ -101,6 +203,83 @@
     min-height:14px;
   }
   .row2{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .expense-main{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .expense-total-display{
+    flex:1;
+    background:var(--panel-raised);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:11px 12px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:16px;
+  }
+  .expense-total-display .dim{
+    font-family:'Noto Sans KR', sans-serif;
+    font-size:12px;
+    color:var(--text-dim);
+    margin-left:6px;
+  }
+  .toggle-btn{
+    background:none;
+    border:1px solid var(--line);
+    color:var(--text-dim);
+    font-size:13px;
+    padding:11px 14px;
+    border-radius:var(--radius);
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .toggle-btn:hover{ border-color:var(--accent); color:var(--accent); }
+  .toggle-btn.open{ color:var(--accent); border-color:var(--accent-dim); }
+  .expense-detail{
+    display:none;
+    margin-top:10px;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .expense-detail.open{ display:block; }
+  .expense-row{
+    display:grid;
+    grid-template-columns:1fr 130px;
+    gap:8px;
+    align-items:center;
+    padding:9px 12px;
+    border-bottom:1px solid var(--line-dim);
+    background:var(--panel-raised);
+  }
+  .expense-row .label-text{
+    font-size:13px;
+    color:var(--text);
+  }
+  .expense-row input.amount-input{
+    background:var(--panel);
+    border:1px solid var(--line);
+    color:var(--text);
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    padding:7px 8px;
+    text-align:right;
+    border-radius:var(--radius);
+    width:100%;
+  }
+  .expense-row input.amount-input:focus{ outline:none; border-color:var(--accent); }
+  .add-row{
+    display:block;
+    width:100%;
+    background:none;
+    border:none;
+    border-top:1px dashed var(--line-dim);
+    color:var(--accent);
+    font-size:12.5px;
+    padding:10px;
+    cursor:pointer;
+  }
+  .add-row:hover{ background:rgba(240,196,25,.06); }
   .checks{
     display:flex;
     flex-direction:column;
@@ -198,27 +377,43 @@
 
   <div class="body">
     <div class="field">
-      <label>양도가액 <span class="unit">백만원 단위</span></label>
-      <input type="text" inputmode="numeric" id="salePrice" placeholder="예: 1,200  (=12억원)" oninput="handleAmountInput(this,'salePreview')">
+      <label><span class="label-main">양도가액 <span class="sub">(매매금액)</span></span> <span class="unit">만원 단위</span></label>
+      <input type="text" inputmode="numeric" id="salePrice" placeholder="예: 120,000  (=12억원)" oninput="handleAmountInput(this,'salePreview')">
       <div class="preview" id="salePreview"></div>
     </div>
 
-    <div class="row2">
-      <div class="field">
-        <label>취득가액 <span class="unit">백만원 단위</span></label>
-        <input type="text" inputmode="numeric" id="buyPrice" placeholder="예: 700  (=7억원)" oninput="handleAmountInput(this,'buyPreview')">
-        <div class="preview" id="buyPreview"></div>
+    <div class="field">
+      <label><span class="label-main">취득가액 <span class="sub">(매입 시 금액)</span></span> <span class="unit">만원 단위</span></label>
+      <input type="text" inputmode="numeric" id="buyPrice" placeholder="예: 70,000  (=7억원)" oninput="handleAmountInput(this,'buyPreview')">
+      <div class="preview" id="buyPreview"></div>
+    </div>
+
+    <div class="field">
+      <label>필요경비 <span class="unit">만원 단위</span></label>
+      <div class="expense-main">
+        <div class="expense-total-display">
+          <span id="expenseTotalNum">0</span>만원
+          <span class="dim" id="expenseTotalWon"></span>
+        </div>
+        <button type="button" class="toggle-btn" id="expenseToggleBtn" onclick="toggleExpenseDetail()">항목 ▾</button>
       </div>
-      <div class="field">
-        <label>필요경비 <span class="unit">백만원 단위</span></label>
-        <input type="text" inputmode="numeric" id="expense" placeholder="예: 30  (=3천만원)" oninput="handleAmountInput(this,'expensePreview')">
-        <div class="preview" id="expensePreview"></div>
+      <div class="expense-detail" id="expenseDetail">
+        <div id="expenseList"></div>
+        <button type="button" class="add-row" onclick="addCustomExpenseRow()">+ 항목 추가</button>
       </div>
     </div>
 
     <div class="field">
-      <label>보유기간 <span class="unit">년</span></label>
+      <label><span class="label-main">보유기간 <button type="button" class="info-btn" id="holdInfoBtn" onclick="toggleHoldInfo()">?</button></span> <span class="unit">년</span></label>
       <input type="number" id="holdYears" placeholder="예: 7" step="0.1">
+      <div class="info-panel" id="holdInfoPanel">
+        <div class="info-title">보유기간별 적용세율</div>
+        <div class="info-row"><span>1년 미만</span><span>50%</span></div>
+        <div class="info-row"><span>1년 이상 ~ 2년 미만</span><span>40%</span></div>
+        <div class="info-row"><span>2년 이상</span><span>기본세율 (6~45% 누진)</span></div>
+        <div class="info-row"><span>3년 이상 보유 시</span><span>6%부터 매년 2%씩 추가 공제 (최대 30%)</span></div>
+        <div class="info-note">단기세율과 장기(기본세율+공제) 중 더 높은 세액이 최종 적용됩니다. 비사업용 토지는 기본세율에 +10%p가 가산됩니다.</div>
+      </div>
     </div>
 
     <div class="checks">
@@ -248,7 +443,28 @@
       <div class="line-item"><span class="k">양도소득금액</span><span class="v" id="rIncome">-</span></div>
       <div class="line-item"><span class="k">양도소득기본공제</span><span class="v" id="rBasic">-</span></div>
       <div class="line-item"><span class="k">과세표준</span><span class="v" id="rBase">-</span></div>
-      <div class="line-item"><span class="k">산출세액 (국세)</span><span class="v" id="rTax">-</span></div>
+      <div class="line-item">
+        <span class="k">산출세액 (국세) <button type="button" class="info-btn" id="taxInfoBtn" onclick="toggleTaxInfo()">?</button></span>
+        <span class="v">
+          <span class="rate-tag" id="rTaxRate"></span>
+          <span id="rTax">-</span>
+        </span>
+      </div>
+      <div class="info-panel tax-info-panel" id="taxInfoPanel">
+        <div class="info-title rate-header">
+          <span>기본세율표 (과세표준 기준)</span>
+          <span class="rate-cols"><span>세율</span><span>누진공제</span></span>
+        </div>
+        <div class="rate-row"><span>1,400만원 이하</span><span>6%</span><span>0원</span></div>
+        <div class="rate-row"><span>1,400만~5,000만원</span><span>15%</span><span>126만원</span></div>
+        <div class="rate-row"><span>5,000만~8,800만원</span><span>24%</span><span>576만원</span></div>
+        <div class="rate-row"><span>8,800만~1억5,000만원</span><span>35%</span><span>1,544만원</span></div>
+        <div class="rate-row"><span>1억5,000만~3억원</span><span>38%</span><span>1,994만원</span></div>
+        <div class="rate-row"><span>3억~5억원</span><span>40%</span><span>2,594만원</span></div>
+        <div class="rate-row"><span>5억~10억원</span><span>42%</span><span>3,594만원</span></div>
+        <div class="rate-row"><span>10억원 초과</span><span>45%</span><span>6,594만원</span></div>
+        <div class="info-note">비사업용 토지는 이 표의 세율에 +10%p가 가산됩니다. 보유기간 1년 미만은 50%, 1~2년은 40% 단일세율이 이 표 대신 적용될 수 있습니다.</div>
+      </div>
       <div class="line-item"><span class="k">지방소득세 (10%)</span><span class="v" id="rLocal">-</span></div>
       <div class="total">
         <span class="k">예상 총 납부세액</span>
@@ -286,10 +502,76 @@ function handleAmountInput(el, previewId){
   const digits = el.value.replace(/[^0-9]/g, '');
   el.value = digits === '' ? '' : Number(digits).toLocaleString('ko-KR');
 
-  const UNIT = 1000000;
+  const UNIT = 10000;
   const val = rawNumber(el.value) * UNIT;
   document.getElementById(previewId).textContent = formatKoreanWon(val);
 }
+
+// ---- 필요경비 세부내역 (토글 방식) ----
+let expenseRowCount = 0;
+const defaultExpenseItems = ['취득세', '취득 시 중개수수료', '법무사·측량비', '자본적지출(개량비)', '양도 시 중개수수료', '기타 비용'];
+
+function toggleTaxInfo(){
+  const panel = document.getElementById('taxInfoPanel');
+  const btn = document.getElementById('taxInfoBtn');
+  const isOpen = panel.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+}
+
+function toggleHoldInfo(){
+  const panel = document.getElementById('holdInfoPanel');
+  const btn = document.getElementById('holdInfoBtn');
+  const isOpen = panel.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+}
+
+function toggleExpenseDetail(){
+  const panel = document.getElementById('expenseDetail');
+  const btn = document.getElementById('expenseToggleBtn');
+  const isOpen = panel.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+  btn.textContent = isOpen ? '항목 ▴' : '항목 ▾';
+}
+
+function addExpenseRow(label){
+  const id = 'exp_' + (expenseRowCount++);
+  const wrap = document.createElement('div');
+  wrap.className = 'expense-row';
+  wrap.id = id;
+  wrap.innerHTML =
+    '<span class="label-text">' + (label || '기타 비용') + '</span>' +
+    '<input type="text" inputmode="numeric" class="amount-input" placeholder="0" oninput="handleExpenseAmountInput(this)">';
+  document.getElementById('expenseList').appendChild(wrap);
+}
+
+function addCustomExpenseRow(){
+  const label = prompt('항목명을 입력하세요', '기타 비용');
+  if(label === null) return; // 취소
+  addExpenseRow(label.trim() || '기타 비용');
+}
+
+function handleExpenseAmountInput(el){
+  const digits = el.value.replace(/[^0-9]/g, '');
+  el.value = digits === '' ? '' : Number(digits).toLocaleString('ko-KR');
+  updateExpenseTotal();
+}
+
+function getExpenseTotalUnits(){
+  const inputs = document.querySelectorAll('#expenseList .amount-input');
+  let sum = 0;
+  inputs.forEach(inp => { sum += rawNumber(inp.value); });
+  return sum;
+}
+
+function updateExpenseTotal(){
+  const UNIT = 10000;
+  const totalUnits = getExpenseTotalUnits();
+  document.getElementById('expenseTotalNum').textContent = totalUnits.toLocaleString('ko-KR');
+  document.getElementById('expenseTotalWon').textContent = totalUnits > 0 ? '(' + formatKoreanWon(totalUnits * UNIT) + ')' : '';
+}
+
+// 기본 항목 6개를 빈 값으로 미리 채워둠
+defaultExpenseItems.forEach(label => addExpenseRow(label));
 
 function progressiveTax(base){
   const brackets = [
@@ -310,11 +592,22 @@ function progressiveTax(base){
   return 0;
 }
 
+function getMarginalRate(base){
+  const brackets = [
+    [14000000, 6], [50000000, 15], [88000000, 24], [150000000, 35],
+    [300000000, 38], [500000000, 40], [1000000000, 42], [Infinity, 45]
+  ];
+  for(const [limit, rate] of brackets){
+    if(base <= limit) return rate;
+  }
+  return 45;
+}
+
 function calculate(){
-  const UNIT = 1000000; // 백만원 단위
+  const UNIT = 10000; // 만원 단위
   const sale = rawNumber(document.getElementById('salePrice').value) * UNIT;
   const buy = rawNumber(document.getElementById('buyPrice').value) * UNIT;
-  const expense = rawNumber(document.getElementById('expense').value) * UNIT;
+  const expense = getExpenseTotalUnits() * UNIT;
   const years = parseFloat(document.getElementById('holdYears').value) || 0;
   const nonBiz = document.getElementById('nonBiz').checked;
   const unregistered = document.getElementById('unregistered').checked;
@@ -327,6 +620,7 @@ function calculate(){
   let basicDeduction = 2500000;
   let base = 0;
   let tax = 0;
+  let rateLabel = '';
 
   if(unregistered){
     // 미등기: 공제 전면 배제, 70% 단일세율
@@ -336,6 +630,7 @@ function calculate(){
     basicDeduction = 0;
     base = gain;
     tax = gain * 0.70;
+    rateLabel = '70% (미등기)';
   } else {
     if(years >= 3){
       deductionRate = Math.min(Math.floor(years) * 2, 30);
@@ -344,19 +639,30 @@ function calculate(){
     income = gain - deductionAmt;
     base = Math.max(income - basicDeduction, 0);
 
+    const marginalRate = getMarginalRate(base);
     const normalTax = progressiveTax(base);
     const nonBizTax = normalTax + base * 0.10; // 비사업용 토지: 기본세율 전 구간 +10%p와 동일한 결과
     let longTermCandidate = nonBiz ? nonBizTax : normalTax;
+    let longTermLabel = marginalRate + '%' + (nonBiz ? '+10%p' : '') + ' (누진)';
 
     // 단기 보유 (장특공 대상 미만) 세율과 비교
     let shortTermCandidate = null;
+    let shortTermLabel = '';
     if(years < 1){
       shortTermCandidate = base * 0.50;
+      shortTermLabel = '50% (1년 미만)';
     } else if(years < 2){
       shortTermCandidate = base * 0.40;
+      shortTermLabel = '40% (1~2년)';
     }
 
-    tax = shortTermCandidate !== null ? Math.max(longTermCandidate, shortTermCandidate) : longTermCandidate;
+    if(shortTermCandidate !== null && shortTermCandidate >= longTermCandidate){
+      tax = shortTermCandidate;
+      rateLabel = shortTermLabel;
+    } else {
+      tax = longTermCandidate;
+      rateLabel = longTermLabel;
+    }
   }
 
   const local = tax * 0.10;
@@ -366,6 +672,7 @@ function calculate(){
   document.getElementById('rGain').textContent = won(gain);
   document.getElementById('rDeduction').textContent = unregistered ? '적용 배제' : (deductionRate + '%  (' + won(deductionAmt) + ')');
   document.getElementById('rIncome').textContent = won(income);
+  document.getElementById('rTaxRate').textContent = rateLabel;
   document.getElementById('rBasic').textContent = unregistered ? '적용 배제' : won(basicDeduction);
   document.getElementById('rBase').textContent = won(base);
   document.getElementById('rTax').textContent = won(tax);
